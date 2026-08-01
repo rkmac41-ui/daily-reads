@@ -2,8 +2,10 @@ name: Build daily issue
 
 on:
   schedule:
-    # 10:17 UTC = 6:17am ET (winter) / 5:17am EDT (summer). Deliberately off the hour:
-    # GitHub deprioritises cron at :00, where the most schedules pile up.
+    # 10:17 UTC = 5:17am ET in winter (EST, UTC-5), 6:17am ET in summer (EDT, UTC-4).
+    # Cron is always UTC and does not follow daylight saving, so the local time shifts
+    # by an hour twice a year. Minute is deliberately off :00 — GitHub deprioritises
+    # cron at the top of the hour, where the most schedules pile up.
     - cron: "17 10 * * *"
   workflow_dispatch: {}     # lets you trigger a run manually from the Actions tab
 
