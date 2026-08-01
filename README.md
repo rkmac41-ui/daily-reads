@@ -2,7 +2,7 @@
 
 Every morning, GitHub Actions builds **two EPUBs** and publishes them to an OPDS catalog your X3 pulls over WiFi:
 
-- **Daily News — YYYY-MM-DD**: six chapters — World in 5 Minutes, India, Arsenal & Premier League, AI News & How People Use It, Markets & Top Tech Stocks (real last-trading-day numbers for 10 tech names), and Something Interesting (a closing digression, not necessarily related to anything else — occasionally includes an image).
+- **Daily News — YYYY-MM-DD**: six chapters — World in 5 Minutes, India, Arsenal & Premier League, AI News & How People Use It, Markets & Top Tech Stocks (real last-trading-day numbers for 10 tech names), and Something Interesting (a closing digression, not necessarily related to anything else). Text only, no images.
 - **AI Study — Day N**: the next lesson in a 43-day "Generative AI & Vision for Image PMs" course, covering classical CV, classifiers, generative models, and the VLM landscape (architectures, major players, and how to track progress as it moves). Progress is tracked in `state.json`; each lesson recaps and builds on what you've completed.
 
 ## One-time setup (~10 minutes)
