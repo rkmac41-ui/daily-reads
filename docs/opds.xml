@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:opds="http://opds-spec.org/2010/catalog">
+  <id>urn:daily-reads:catalog</id>
+  <title>Daily Reads</title>
+  <updated>2026-08-01T19:27:16Z</updated>
+  <author><name>Daily Reads</name></author>
+  <link rel="self" type="application/atom+xml;profile=opds-catalog;kind=acquisition"
+        href="https://rkmac41-ui.github.io/daily-reads/opds.xml"/>
+
+  <entry>
+    <title>Daily News — 2026-08-01</title>
+    <id>urn:daily-reads:news-2026-08-01.epub</id>
+    <updated>2026-08-01T19:27:16Z</updated>
+    <author><name>Daily Reads</name></author>
+    <content type="text">World, Arsenal &amp; sports, AI news, vision &amp; multimodal</content>
+    <link rel="http://opds-spec.org/acquisition"
+          type="application/epub+zip"
+          href="https://rkmac41-ui.github.io/daily-reads/issues/news-2026-08-01.epub"/>
+  </entry>
+  <entry>
+    <title>AI Study — Day 1</title>
+    <id>urn:daily-reads:study-day-01.epub</id>
+    <updated>2026-08-01T19:27:16Z</updated>
+    <author><name>Daily Reads</name></author>
+    <content type="text">Generative AI &amp; vision course lesson</content>
+    <link rel="http://opds-spec.org/acquisition"
+          type="application/epub+zip"
+          href="https://rkmac41-ui.github.io/daily-reads/issues/study-day-01.epub"/>
+  </entry>
+</feed>

@@ -1,1 +1,6 @@
-{"next_day": 1, "completed": []}
+{
+  "next_day": 2,
+  "completed": [
+    "Day 1: Recap sprint: how models learn"
+  ]
+}
