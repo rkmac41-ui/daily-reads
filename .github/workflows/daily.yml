@@ -1,0 +1,36 @@
+name: Build daily issue
+
+on:
+  schedule:
+    - cron: "0 10 * * *"   # 10:00 UTC = 6am ET (winter) / 5am ET (summer offset: use 9 for 5am EDT)
+  workflow_dispatch: {}     # lets you trigger a run manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install feedparser ebooklib anthropic
+
+      - name: Generate issue + OPDS catalog
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}  # optional
+          SITE_BASE: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+        run: python generate.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "daily-reads-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add docs/ state.json
+          git diff --cached --quiet || git commit -m "Daily issue $(date -u +%F)"
+          git push
