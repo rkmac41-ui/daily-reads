@@ -205,8 +205,7 @@ PLAIN_TEXT_RULES = (
 )
 
 # ─────────────────────────────────────────────────────────────
-# EPUB assembly — build the book incrementally so chapters (news sections, markets,
-# the interesting digest) can each contribute their own embedded images if they have one.
+# EPUB assembly
 # ─────────────────────────────────────────────────────────────
 def new_book(identifier, title):
     book = epub.EpubBook()
@@ -306,8 +305,8 @@ def build_markets_chapter():
 # ─────────────────────────────────────────────────────────────
 # Something Interesting — a closing digression, unrelated to anything else in the issue.
 # Grounded (optionally) in Wikipedia's "on this day" feed so it's a real fact rather than
-# a model invention, but the prompt explicitly allows Claude to pick something else. Embeds
-# an image only when a decent one is available — never forced.
+# a model invention, but the prompt explicitly allows Claude to pick something else.
+# Text only — no image embedding.
 # ─────────────────────────────────────────────────────────────
 def fetch_on_this_day():
     today = datetime.date.today()
@@ -321,18 +320,13 @@ def fetch_on_this_day():
         print(f"  ! on-this-day fetch failed: {e}")
         return []
 
-def build_interesting_chapter(book):
+def build_interesting_chapter():
     print("Fetching: Something Interesting")
     events = fetch_on_this_day()
-    material, image_url = "", None
+    material = ""
     if events:
         picks = random.sample(events, min(4, len(events)))
         material = "\n\n".join(f"- {e.get('text', '')}" for e in picks)
-        for e in picks:
-            pages = e.get("pages") or []
-            if pages and pages[0].get("thumbnail"):
-                image_url = pages[0]["thumbnail"]["source"]
-                break
 
     prompt = (
         "You write the closing 'Something Interesting' section of a daily digest read on a "
@@ -353,24 +347,6 @@ def build_interesting_chapter(book):
         return None  # skip the chapter rather than publish nothing interesting
     content = strip_redundant_leading_heading(content, "Something Interesting")
     body = text_to_xhtml(content)
-
-    if image_url:
-        try:
-            req = urllib.request.Request(image_url, headers={"User-Agent": UA})
-            with urllib.request.urlopen(req, timeout=15) as r:
-                img_bytes = r.read()
-            ext = image_url.rsplit(".", 1)[-1].split("?")[0].lower()
-            ext = ext if ext in ("jpg", "jpeg", "png") else "jpg"
-            media_type = "image/png" if ext == "png" else "image/jpeg"
-            img_item = epub.EpubItem(
-                uid="interesting_img", file_name=f"images/interesting.{ext}",
-                media_type=media_type, content=img_bytes,
-            )
-            book.add_item(img_item)
-            body = f'<img src="images/interesting.{ext}" alt="Illustration"/>' + body
-        except Exception as e:
-            print(f"  ! image embed failed (continuing without it): {e}")
-
     return ("Something Interesting", body)
 
 # ─────────────────────────────────────────────────────────────
@@ -410,7 +386,7 @@ def build_news(date_str):
         chapters.append(add_chapter(book, idx, "Markets & Top Tech Stocks", market_body))
         idx += 1
 
-    interesting = build_interesting_chapter(book)
+    interesting = build_interesting_chapter()
     if interesting:
         title, body = interesting
         chapters.append(add_chapter(book, idx, title, body))
