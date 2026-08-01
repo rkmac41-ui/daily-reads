@@ -2,11 +2,14 @@ name: Build daily issue
 
 on:
   schedule:
-    - cron: "0 10 * * *"   # 10:00 UTC = 6am ET (winter) / 5am ET (summer offset: use 9 for 5am EDT)
+    # 10:17 UTC = 6:17am ET (winter) / 5:17am EDT (summer). Deliberately off the hour:
+    # GitHub deprioritises cron at :00, where the most schedules pile up.
+    - cron: "17 10 * * *"
   workflow_dispatch: {}     # lets you trigger a run manually from the Actions tab
 
 permissions:
   contents: write
+  issues: write             # so a failed run can open an issue and email you
 
 jobs:
   build:
@@ -23,7 +26,7 @@ jobs:
 
       - name: Generate issue + OPDS catalog
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}  # optional
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           SITE_BASE: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
         run: python generate.py
 
@@ -31,6 +34,32 @@ jobs:
         run: |
           git config user.name "daily-reads-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add docs/ state.json
-          git diff --cached --quiet || git commit -m "Daily issue $(date -u +%F)"
+
+          # Keepalive: GitHub disables scheduled workflows after 60 days with no new
+          # commits. This timestamp always changes, so every run produces a commit even
+          # on a day when no new issue was built.
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > .keepalive
+
+          git add docs/ state.json .keepalive
+          git commit -m "Daily issue $(date -u +%F)"
+          git pull --rebase --autostash origin main || true
           git push
+
+      - name: Open an issue if the build failed
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "Daily build failed — $(date -u +%F)" \
+            --body "The daily build did not complete.
+
+          Run log: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
+
+          Likely causes:
+          - ANTHROPIC_API_KEY missing, expired, or out of credit
+          - GitHub Actions outage
+          - a code change that broke generate.py
+
+          state.json was NOT advanced, so today's lesson will retry on the next run."
