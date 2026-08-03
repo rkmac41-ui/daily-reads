@@ -1,8 +1,9 @@
 {
-  "next_day": 4,
+  "next_day": 5,
   "completed": [
     "Day 1: Recap sprint: how models learn",
     "Day 2: Recap sprint: metrics for image tasks",
-    "Day 3: How computers see: pixels, tensors, channels"
+    "Day 3: How computers see: pixels, tensors, channels",
+    "Day 4: Convolutions and CNNs"
   ]
 }
