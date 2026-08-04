@@ -26,6 +26,11 @@ DOCS = os.path.join(ROOT, "docs")
 ISSUES_DIR = os.path.join(DOCS, "issues")
 SITE_BASE = os.environ.get("SITE_BASE", "https://YOURUSER.github.io/daily-reads")
 API_KEY = os.environ.get("ANTHROPIC_API_KEY")
+# Pinned fallback model for the direct-API path only (see ask_claude_via_api). The raw
+# Messages API takes a specific model id, not a rolling alias, so this needs bumping by
+# hand when a new Sonnet generation ships. The primary OAuth/CLI path doesn't have this
+# problem — it passes `--model sonnet` to the Claude Code CLI, which always resolves to
+# the latest Sonnet release on its own (see ask_claude_via_subscription).
 MODEL = "claude-sonnet-4-6"
 
 KEEP_NEWS = 14    # days of news back-issues kept in catalog
@@ -132,11 +137,13 @@ def fetch(feeds, max_items, lookback_hours=26):
 def ask_claude_via_subscription(prompt):
     """Headless Claude Code CLI, authenticated via CLAUDE_CODE_OAUTH_TOKEN.
     Draws from a Pro/Max subscription's included usage instead of per-token API billing.
+    Pinned to the "sonnet" model alias, which the CLI always resolves to the latest
+    available Sonnet release — no manual bump needed when a new Sonnet generation ships.
     Requires: npm install -g @anthropic-ai/claude-code in the workflow, and the
     CLAUDE_CODE_OAUTH_TOKEN secret (generate locally with `claude setup-token`)."""
     try:
         result = subprocess.run(
-            ["claude", "-p", prompt],
+            ["claude", "--model", "sonnet", "-p", prompt],
             capture_output=True, text=True, timeout=180,
         )
         if result.returncode != 0:
@@ -155,7 +162,9 @@ def ask_claude_via_subscription(prompt):
         return None
 
 def ask_claude_via_api(prompt, max_tokens=3000):
-    """Direct Anthropic API call, billed per token via ANTHROPIC_API_KEY."""
+    """Direct Anthropic API call, billed per token via ANTHROPIC_API_KEY. Pinned to MODEL —
+    unlike the CLI path, the raw API has no rolling "latest Sonnet" alias, so MODEL must be
+    bumped by hand when a new Sonnet generation ships."""
     if not API_KEY:
         return None
     try:
@@ -171,8 +180,12 @@ def ask_claude_via_api(prompt, max_tokens=3000):
         return None
 
 def ask_claude(prompt, max_tokens=3000):
-    # Prefer the subscription (CLAUDE_CODE_OAUTH_TOKEN) route if configured;
-    # fall back to a direct API key if present; otherwise skip (caller handles None).
+    # Prefer the subscription (CLAUDE_CODE_OAUTH_TOKEN) route if configured — it always
+    # runs the latest Sonnet release; fall back to a direct API key if present (pinned to
+    # MODEL, see ask_claude_via_api); otherwise skip (caller handles None). A run only
+    # reaches the API-key fallback if CLAUDE_CODE_OAUTH_TOKEN is unset, or the CLI call
+    # itself fails for any reason — including an expired/invalid token, which the CLI
+    # surfaces as a non-zero exit code.
     if os.environ.get("CLAUDE_CODE_OAUTH_TOKEN"):
         out = ask_claude_via_subscription(prompt)
         if out:
