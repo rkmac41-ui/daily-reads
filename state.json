@@ -1,11 +1,12 @@
 {
-  "next_day": 7,
+  "next_day": 8,
   "completed": [
     "Day 1: Recap sprint: how models learn",
     "Day 2: Recap sprint: metrics for image tasks",
     "Day 3: How computers see: pixels, tensors, channels",
     "Day 4: Convolutions and CNNs",
     "Day 5: Classic CNN families you'll hear in meetings",
-    "Day 6: Embeddings: the core currency of your job"
+    "Day 6: Embeddings: the core currency of your job",
+    "Day 7: Vision Transformers (ViT)"
   ]
 }
