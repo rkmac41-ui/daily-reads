@@ -11,6 +11,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      commit_sha: ${{ steps.commit.outputs.sha }}
     steps:
       - uses: actions/checkout@v4
 
@@ -40,9 +42,100 @@ jobs:
         run: python generate.py
 
       - name: Commit and push
+        id: commit
         run: |
           git config user.name "daily-reads-bot"
           git config user.email "bot@users.noreply.github.com"
           git add docs/ state.json
           git diff --cached --quiet || git commit -m "Daily issue $(date -u +%F)"
           git push
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  # GitHub's own "pages build and deployment" workflow (Settings > Pages, source =
+  # "Deploy from a branch") runs independently after the push above — it isn't a file
+  # in this repo, so it can't be edited directly. It has occasionally stalled in
+  # "deployment_queued" for its full ~10min internal timeout and failed (seen 2026-08-06).
+  # This job watches for that specific failure mode and retries the deployment once,
+  # so a transient stall on GitHub's Pages backend heals itself without manual action.
+  verify-pages:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write   # to rerun the Pages deployment run if it failed
+      issues: write    # to open an issue if the retry also fails
+    steps:
+      - name: Verify Pages deployment succeeded, retry once if not
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SHA: ${{ needs.build.outputs.commit_sha }}
+        run: |
+          set -e
+          REPO="${{ github.repository }}"
+          PAGES_WORKFLOW_ID=325220512   # GitHub's built-in "pages build and deployment"
+
+          echo "Looking for the Pages deployment run for $SHA..."
+          run_json=""
+          for i in $(seq 1 20); do
+            run_json="$(gh api "repos/$REPO/actions/workflows/$PAGES_WORKFLOW_ID/runs?head_sha=$SHA&per_page=1" --jq '.workflow_runs[0] // empty')"
+            [ -n "$run_json" ] && break
+            sleep 15
+          done
+          if [ -z "$run_json" ]; then
+            echo "No Pages deployment run appeared for $SHA within 5 min — nothing to verify."
+            exit 0
+          fi
+          run_id="$(echo "$run_json" | jq -r .id)"
+          echo "Tracking Pages deployment run $run_id"
+
+          status="" conclusion=""
+          for i in $(seq 1 60); do
+            info="$(gh api "repos/$REPO/actions/runs/$run_id")"
+            status="$(echo "$info" | jq -r .status)"
+            conclusion="$(echo "$info" | jq -r .conclusion)"
+            echo "status=$status conclusion=$conclusion"
+            [ "$status" = "completed" ] && break
+            sleep 15
+          done
+
+          if [ "$status" != "completed" ]; then
+            echo "::warning::Pages deployment run $run_id did not reach a terminal state within 15 min."
+            exit 0
+          fi
+          if [ "$conclusion" = "success" ]; then
+            echo "Pages deployment succeeded — nothing to do."
+            exit 0
+          fi
+
+          echo "::warning::Pages deployment run $run_id finished with conclusion=$conclusion — retrying once."
+          gh api -X POST "repos/$REPO/actions/runs/$run_id/rerun"
+
+          status="" conclusion=""
+          for i in $(seq 1 60); do
+            info="$(gh api "repos/$REPO/actions/runs/$run_id")"
+            status="$(echo "$info" | jq -r .status)"
+            conclusion="$(echo "$info" | jq -r .conclusion)"
+            echo "retry status=$status conclusion=$conclusion"
+            [ "$status" = "completed" ] && break
+            sleep 15
+          done
+
+          if [ "$conclusion" != "success" ]; then
+            echo "::error::Pages deployment still not successful after retry (status=$status conclusion=$conclusion)."
+            exit 1
+          fi
+          echo "Pages deployment succeeded after retry."
+
+      - name: Open an issue if Pages deployment failed twice
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --repo "${{ github.repository }}" \
+            --title "Pages deployment failed twice — $(date -u +%F)" \
+            --body "Today's daily issue generated and committed fine, but the GitHub Pages deployment (Settings > Pages) failed, and an automatic retry also failed.
+
+          Pages deployment runs: $GITHUB_SERVER_URL/${{ github.repository }}/actions/workflows/325220512/runs
+          Pages settings: $GITHUB_SERVER_URL/${{ github.repository }}/settings/pages
+
+          The commit with today's content is already on main — only the live site publish is affected. If GitHub Pages itself is degraded, check https://www.githubstatus.com/."
