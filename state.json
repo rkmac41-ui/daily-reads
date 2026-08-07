@@ -1,5 +1,5 @@
 {
-  "next_day": 8,
+  "next_day": 9,
   "completed": [
     "Day 1: Recap sprint: how models learn",
     "Day 2: Recap sprint: metrics for image tasks",
@@ -7,6 +7,7 @@
     "Day 4: Convolutions and CNNs",
     "Day 5: Classic CNN families you'll hear in meetings",
     "Day 6: Embeddings: the core currency of your job",
-    "Day 7: Vision Transformers (ViT)"
+    "Day 7: Vision Transformers (ViT)",
+    "Day 8: CLIP, properly this time"
   ]
 }
