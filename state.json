@@ -1,5 +1,5 @@
 {
-  "next_day": 10,
+  "next_day": 11,
   "completed": [
     "Day 1: Recap sprint: how models learn",
     "Day 2: Recap sprint: metrics for image tasks",
@@ -9,6 +9,7 @@
     "Day 6: Embeddings: the core currency of your job",
     "Day 7: Vision Transformers (ViT)",
     "Day 8: CLIP, properly this time",
-    "Day 9: Zero-shot vs fine-tuned classification"
+    "Day 9: Zero-shot vs fine-tuned classification",
+    "Day 10: Building an image classification product"
   ]
 }
