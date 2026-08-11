@@ -1,5 +1,5 @@
 {
-  "next_day": 12,
+  "next_day": 13,
   "completed": [
     "Day 1: Recap sprint: how models learn",
     "Day 2: Recap sprint: metrics for image tasks",
@@ -11,6 +11,7 @@
     "Day 8: CLIP, properly this time",
     "Day 9: Zero-shot vs fine-tuned classification",
     "Day 10: Building an image classification product",
-    "Day 11: Object detection and segmentation"
+    "Day 11: Object detection and segmentation",
+    "Day 12: Image quality and similarity metrics"
   ]
 }
