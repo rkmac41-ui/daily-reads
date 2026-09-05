@@ -3,15 +3,25 @@
       xmlns:opds="http://opds-spec.org/2010/catalog">
   <id>urn:daily-reads:catalog</id>
   <title>Daily Reads</title>
-  <updated>2026-09-04T14:01:54Z</updated>
+  <updated>2026-09-05T13:16:34Z</updated>
   <author><name>Daily Reads</name></author>
   <link rel="self" type="application/atom+xml;profile=opds-catalog;kind=acquisition"
         href="https://rkmac41-ui.github.io/daily-reads/opds.xml"/>
 
   <entry>
+    <title>Daily News — 2026-09-05</title>
+    <id>urn:daily-reads:news-2026-09-05.epub</id>
+    <updated>2026-09-05T13:16:34Z</updated>
+    <author><name>Daily Reads</name></author>
+    <content type="text">World, Arsenal &amp; sports, AI news, vision &amp; multimodal</content>
+    <link rel="http://opds-spec.org/acquisition"
+          type="application/epub+zip"
+          href="https://rkmac41-ui.github.io/daily-reads/issues/news-2026-09-05.epub"/>
+  </entry>
+  <entry>
     <title>Daily News — 2026-09-04</title>
     <id>urn:daily-reads:news-2026-09-04.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">World, Arsenal &amp; sports, AI news, vision &amp; multimodal</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -21,7 +31,7 @@
   <entry>
     <title>Daily News — 2026-09-03</title>
     <id>urn:daily-reads:news-2026-09-03.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">World, Arsenal &amp; sports, AI news, vision &amp; multimodal</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -31,7 +41,7 @@
   <entry>
     <title>Daily News — 2026-09-02</title>
     <id>urn:daily-reads:news-2026-09-02.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">World, Arsenal &amp; sports, AI news, vision &amp; multimodal</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -41,7 +51,7 @@
   <entry>
     <title>Daily News — 2026-09-01</title>
     <id>urn:daily-reads:news-2026-09-01.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">World, Arsenal &amp; sports, AI news, vision &amp; multimodal</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -51,7 +61,7 @@
   <entry>
     <title>Daily News — 2026-08-31</title>
     <id>urn:daily-reads:news-2026-08-31.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">World, Arsenal &amp; sports, AI news, vision &amp; multimodal</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -61,7 +71,7 @@
   <entry>
     <title>Daily News — 2026-08-30</title>
     <id>urn:daily-reads:news-2026-08-30.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">World, Arsenal &amp; sports, AI news, vision &amp; multimodal</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -71,7 +81,7 @@
   <entry>
     <title>Daily News — 2026-08-29</title>
     <id>urn:daily-reads:news-2026-08-29.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">World, Arsenal &amp; sports, AI news, vision &amp; multimodal</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -81,7 +91,7 @@
   <entry>
     <title>Daily News — 2026-08-28</title>
     <id>urn:daily-reads:news-2026-08-28.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">World, Arsenal &amp; sports, AI news, vision &amp; multimodal</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -91,7 +101,7 @@
   <entry>
     <title>Daily News — 2026-08-27</title>
     <id>urn:daily-reads:news-2026-08-27.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">World, Arsenal &amp; sports, AI news, vision &amp; multimodal</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -101,7 +111,7 @@
   <entry>
     <title>Daily News — 2026-08-26</title>
     <id>urn:daily-reads:news-2026-08-26.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">World, Arsenal &amp; sports, AI news, vision &amp; multimodal</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -111,7 +121,7 @@
   <entry>
     <title>Daily News — 2026-08-25</title>
     <id>urn:daily-reads:news-2026-08-25.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">World, Arsenal &amp; sports, AI news, vision &amp; multimodal</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -121,7 +131,7 @@
   <entry>
     <title>Daily News — 2026-08-24</title>
     <id>urn:daily-reads:news-2026-08-24.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">World, Arsenal &amp; sports, AI news, vision &amp; multimodal</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -131,7 +141,7 @@
   <entry>
     <title>Daily News — 2026-08-23</title>
     <id>urn:daily-reads:news-2026-08-23.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">World, Arsenal &amp; sports, AI news, vision &amp; multimodal</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -139,19 +149,9 @@
           href="https://rkmac41-ui.github.io/daily-reads/issues/news-2026-08-23.epub"/>
   </entry>
   <entry>
-    <title>Daily News — 2026-08-22</title>
-    <id>urn:daily-reads:news-2026-08-22.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
-    <author><name>Daily Reads</name></author>
-    <content type="text">World, Arsenal &amp; sports, AI news, vision &amp; multimodal</content>
-    <link rel="http://opds-spec.org/acquisition"
-          type="application/epub+zip"
-          href="https://rkmac41-ui.github.io/daily-reads/issues/news-2026-08-22.epub"/>
-  </entry>
-  <entry>
     <title>AI Study — Day 12</title>
     <id>urn:daily-reads:study-day-12.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">Generative AI &amp; vision course lesson</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -161,7 +161,7 @@
   <entry>
     <title>AI Study — Day 11</title>
     <id>urn:daily-reads:study-day-11.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">Generative AI &amp; vision course lesson</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -171,7 +171,7 @@
   <entry>
     <title>AI Study — Day 10</title>
     <id>urn:daily-reads:study-day-10.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">Generative AI &amp; vision course lesson</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -181,7 +181,7 @@
   <entry>
     <title>AI Study — Day 9</title>
     <id>urn:daily-reads:study-day-09.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">Generative AI &amp; vision course lesson</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -191,7 +191,7 @@
   <entry>
     <title>AI Study — Day 8</title>
     <id>urn:daily-reads:study-day-08.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">Generative AI &amp; vision course lesson</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -201,7 +201,7 @@
   <entry>
     <title>AI Study — Day 7</title>
     <id>urn:daily-reads:study-day-07.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">Generative AI &amp; vision course lesson</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -211,7 +211,7 @@
   <entry>
     <title>AI Study — Day 6</title>
     <id>urn:daily-reads:study-day-06.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">Generative AI &amp; vision course lesson</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -221,7 +221,7 @@
   <entry>
     <title>AI Study — Day 5</title>
     <id>urn:daily-reads:study-day-05.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">Generative AI &amp; vision course lesson</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -231,7 +231,7 @@
   <entry>
     <title>AI Study — Day 4</title>
     <id>urn:daily-reads:study-day-04.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">Generative AI &amp; vision course lesson</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -241,7 +241,7 @@
   <entry>
     <title>AI Study — Day 3</title>
     <id>urn:daily-reads:study-day-03.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">Generative AI &amp; vision course lesson</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -251,7 +251,7 @@
   <entry>
     <title>AI Study — Day 2</title>
     <id>urn:daily-reads:study-day-02.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">Generative AI &amp; vision course lesson</content>
     <link rel="http://opds-spec.org/acquisition"
@@ -261,7 +261,7 @@
   <entry>
     <title>AI Study — Day 1</title>
     <id>urn:daily-reads:study-day-01.epub</id>
-    <updated>2026-09-04T14:01:54Z</updated>
+    <updated>2026-09-05T13:16:34Z</updated>
     <author><name>Daily Reads</name></author>
     <content type="text">Generative AI &amp; vision course lesson</content>
     <link rel="http://opds-spec.org/acquisition"
